@@ -1,0 +1,52 @@
+/*Reset*/
+@import 'reset.css';
+
+*,*::before,*::after{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,body{
+    height: 100%;
+}
+
+/*Variables*/
+:root{
+    --bg: #191516ff;
+    --primary: #e4572eff;
+    --maximum-blue-green: #17bebbff;
+    --sunglow: #ffc914ff;  
+    --green-ryb: #76b041ff;
+}
+
+body{
+    background-color: var(--bg);
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/*Calculator*/
+.calculator{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 25px;
+    height: 500px;
+    width: 320px;
+
+    background-color: var(--primary);
+}
+
+.display{
+    margin: 2rem;
+    width: 80%;
+    height: 5rem;
+    background-color: var(--bg);
+}
