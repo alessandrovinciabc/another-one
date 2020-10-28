@@ -15,9 +15,9 @@ html,body{
 :root{
     --bg: #191516ff;
     --primary: #e4572eff;
-    --maximum-blue-green: #17bebbff;
-    --sunglow: #ffc914ff;  
-    --green-ryb: #76b041ff;
+    --secondary: #76b041ff;
+    --details: #ffc914ff;  
+    --green-ryb: #17bebbff;
 }
 
 body{
@@ -45,8 +45,19 @@ body{
 }
 
 .display{
-    margin: 2rem;
+    margin: 2rem 0;
     width: 80%;
     height: 5rem;
     background-color: var(--bg);
+}
+
+.pad{
+    margin-bottom: 2rem;
+    background-color: var(--secondary);
+    height: 100%;
+    width: 80%;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
 }
