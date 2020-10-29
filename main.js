@@ -1,3 +1,21 @@
+function generateButtons(num, templateValues){
+    let result, templateIsValid;
+    result = [];
+    templateIsValid = templateValues && templateValues.length >= num? true : false;
+
+    for(let i=0; i < num; ++i){
+        let newButton, buttonValue;
+        buttonValue = templateIsValid? templateValues[i] : i;
+        newButton = document.createElement('button');
+        newButton.setAttribute('data-key', `${buttonValue}`);
+        newButton.textContent = `${buttonValue}`;
+        
+        result.push(newButton);
+    }
+
+    return result;
+}
+
 const DOM = {
     calculator: document.querySelector('.calculator'),
     display: document.querySelector('.display'),
@@ -9,25 +27,9 @@ let numericPad, opButtons;
 numericPad = [];
 opButtons = [];
 
-//Generate numeric pad
-for(let i=0; i <= 9; ++i){
-    let newButton;
-    newButton = document.createElement('button');
-    newButton.setAttribute('data-key', `${i}`);
-    newButton.textContent = `${i}`;
-
-    numericPad.push(newButton);
-}
-
-//Generate special buttons
-for(let i=0; i < opList.length; ++i){
-    let newButton;
-    newButton = document.createElement('button');
-    newButton.setAttribute('data-key', `${opList[i]}`);
-    newButton.textContent = `${opList[i]}`;
-
-    opButtons.push(newButton);
-}
+//Generate numeric pad and special buttons
+numericPad = generateButtons(10);
+opButtons = generateButtons(opList.length, opList);
 
 //Append to pad in correct order
 DOM.pad.append(
