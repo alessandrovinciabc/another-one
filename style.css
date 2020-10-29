@@ -64,14 +64,14 @@ body{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
+    gap: 6px;
 }
 
 .pad > button{
     border-radius: 0;
     border: none;
-    border: 3px solid var(--primary);
-    background-color: var(--secondary);
 
+    background-color: var(--secondary);
     font-family: 'Open Sans Condensed', sans-serif;
     font-size: 2rem;
 
