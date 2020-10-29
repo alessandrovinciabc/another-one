@@ -4,7 +4,7 @@ const DOM = {
     pad: document.querySelector('.pad'),
 };
 
-const opList = ['AC', '/', '*', '-', '+', 'HI', 'CE', '=', '.'];
+const opList = ['AC', '/', '*', '-', '+', 'HI', 'C', '.', '='];
 let numericPad, opButtons;
 numericPad = [];
 opButtons = [];
@@ -29,5 +29,11 @@ for(let i=0; i < opList.length; ++i){
     opButtons.push(newButton);
 }
 
-DOM.pad.append(...numericPad);
-DOM.pad.append(...opButtons);
+//Append to pad in correct order
+DOM.pad.append(
+    opButtons[0], opButtons[1], opButtons[2], opButtons[3],
+    numericPad[7], numericPad[8], numericPad[9], opButtons[4],
+    numericPad[4], numericPad[5], numericPad[6], opButtons[5],
+    numericPad[3], numericPad[2], numericPad[1], opButtons[6],
+    opButtons[7], numericPad[0], opButtons[8]
+);
