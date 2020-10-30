@@ -18,6 +18,7 @@ html,body{
     --secondary: #76b041ff;
     --hover: #17bebbff;
     --active: #ffc914ff;
+    --display-text-color: #ffc914ff;
     
 }
 
@@ -48,12 +49,21 @@ body{
 }
 
 .display{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 5px;
     margin: 2rem 0;
     width: 80%;
     height: 5rem;
     background-color: var(--bg);
 
     border: 2px solid var(--secondary);
+    color: var(--display-text-color);
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 3rem;
+
+    overflow: hidden;
 }
 
 .pad{
