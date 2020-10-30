@@ -19,6 +19,10 @@ html,body{
     --hover: #17bebbff;
     --active: #ffc914ff;
     --display-text-color: #ffc914ff;
+    --cta-button: #17bebbff;
+    --cta-hover: #191516ff;;
+    --cta-active: #ffc914ff;
+    --operator-button: #191516ff;
     
 }
 
@@ -80,6 +84,7 @@ body{
 .pad > button{
     border-radius: 0;
     border: none;
+    outline: none;
 
     background-color: var(--secondary);
     font-family: 'Open Sans Condensed', sans-serif;
@@ -99,4 +104,19 @@ body{
 
 .pad > button[data-key="="]{
     grid-column-end: span 2;
+    background-color: var(--cta-button);
+    color: white;
+}
+
+.pad > button[data-key="="]:hover{
+    background-color: var(--cta-hover);
+}
+
+.pad > button[data-key="="]:active{
+    background-color: var(--cta-active);
+}
+
+button[data-key="AC"], button[data-key="C"], button[data-key="+"], button[data-key="-"], button[data-key="/"], button[data-key="*"], button[data-key="HI"], button[data-key="."]{
+    background-color: var(--operator-button);
+    color: white;
 }
