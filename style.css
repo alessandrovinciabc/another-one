@@ -120,3 +120,33 @@ button[data-key="AC"], button[data-key="C"], button[data-key="+"], button[data-k
     background-color: var(--operator-button);
     color: white;
 }
+
+footer{
+    position: absolute;
+    bottom: 5px;
+
+    color: white;
+    background-color: var(--bg);
+
+    
+    text-align: left;
+    width: 100%;
+    padding-left: 15px;
+}
+
+footer>.signature{
+    font-family: 'Nothing You Could Do', cursive;
+}
+
+@media only screen and (max-height: 550px) {
+    footer{
+        display: none;
+    }
+  }
+
+@media only screen and (max-width: 550px) {
+    footer{
+        text-align: center;
+        padding-left: 0;
+    }
+}
