@@ -133,7 +133,9 @@ DOM.pad.addEventListener('click', function(e){
         }else{
             switch(key){
                 case '.':
-                    if(!isDotEnabled && !isDisplayTemp){
+                    let displayLength;
+                    displayLength = DOM.display.textContent.length;
+                    if(!isDotEnabled && !isDisplayTemp && displayLength > 0){
                         appendToDisplay(DOM.display, '.');
                         isDotEnabled = true;
                     }
