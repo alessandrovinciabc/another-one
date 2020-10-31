@@ -1,3 +1,5 @@
+const ERROR_STRING = 'SPOOKY D:';
+
 function generateButtons(num, templateValues){
     let result, templateIsValid;
     result = [];
@@ -29,7 +31,13 @@ function multiply(a,b){
 }
 
 function divide(a,b){
-    return a/b;
+    let output;
+    if(b === 0){
+        output = ERROR_STRING;
+    }else{
+        output = a/b;
+    }
+    return output;
 }
 
 function operate(operator, a,b){
@@ -46,7 +54,7 @@ function operate(operator, a,b){
 function getDisplay(domObject){
     let text, output;
     text = domObject.textContent;
-    if(text === '.' || text === ''){
+    if(text === '.' || text === '' || text === ERROR_STRING){
         output = '0';
     }else{
         output = text;
@@ -119,10 +127,17 @@ DOM.pad.addEventListener('click', function(e){
             if(operator){
                 storedEntry = operate(operator, parseFloat(storedEntry), parseFloat(getDisplay(DOM.display)));
                 resetDisplay(DOM.display);
-                appendToDisplay(DOM.display, isInt(storedEntry) ? storedEntry : storedEntry.toFixed(2));
+
+                if(typeof storedEntry === "string"){ //means we've got an error
+                    appendToDisplay(DOM.display, storedEntry);
+                    tempOperator = '';
+                }else{
+                    appendToDisplay(DOM.display, isInt(storedEntry) ? storedEntry : storedEntry.toFixed(2));
+                    tempOperator = key;
+                }
+                
                 isDisplayTemp = true;
                 isDotEnabled = false;
-                tempOperator = key;
                 operator = '';
             }else{
                 storedEntry = getDisplay(DOM.display);
@@ -159,7 +174,12 @@ DOM.pad.addEventListener('click', function(e){
                         storedEntry = operate(operator, parseFloat(storedEntry), parseFloat(getDisplay(DOM.display)));
                         operator = '';
                         resetDisplay(DOM.display);
-                        appendToDisplay(DOM.display, isInt(storedEntry) ? storedEntry : storedEntry.toFixed(2));
+                        if(typeof storedEntry === "string"){
+                            appendToDisplay(DOM.display, storedEntry);
+                            tempOperator = '';
+                        }else{
+                            appendToDisplay(DOM.display, isInt(storedEntry) ? storedEntry : storedEntry.toFixed(2));
+                        }
                         isDisplayTemp = true;
                         isDotEnabled = false;
                     }
