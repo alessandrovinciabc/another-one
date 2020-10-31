@@ -1,4 +1,19 @@
 const ERROR_STRING = 'SPOOKY D:';
+const DOM = {
+    calculator: document.querySelector('.calculator'),
+    display: document.querySelector('.display'),
+    pad: document.querySelector('.pad'),
+};
+const opList = ['AC', '/', '*', '-', '+', 'HI', 'C', '.', '='];
+let numericPad, opButtons, storedEntry, operator, tempOperator, isDisplayTemp, isDotEnabled;
+numericPad = [];
+opButtons = [];
+
+storedEntry = '0';
+operator = '';
+tempOperator = '';
+isDisplayTemp = false;
+isDotEnabled = false;
 
 function generateButtons(num, templateValues){
     let result, templateIsValid;
@@ -76,40 +91,11 @@ function isInt(num){
     return num % 1 ? false : true;
 }
 
-const DOM = {
-    calculator: document.querySelector('.calculator'),
-    display: document.querySelector('.display'),
-    pad: document.querySelector('.pad'),
-};
-const opList = ['AC', '/', '*', '-', '+', 'HI', 'C', '.', '='];
-let numericPad, opButtons, storedEntry, operator, tempOperator, isDisplayTemp, isDotEnabled;
-numericPad = [];
-opButtons = [];
-
-storedEntry = '0';
-operator = '';
-tempOperator = '';
-isDisplayTemp = false;
-isDotEnabled = false;
-
-
-//Generate numeric pad and special buttons
-numericPad = generateButtons(10);
-opButtons = generateButtons(opList.length, opList);
-
-//Append to pad in correct order
-DOM.pad.append(
-    opButtons[0], opButtons[1], opButtons[2], opButtons[3],
-    numericPad[7], numericPad[8], numericPad[9], opButtons[4],
-    numericPad[4], numericPad[5], numericPad[6], opButtons[5],
-    numericPad[3], numericPad[2], numericPad[1], opButtons[6],
-    opButtons[7], numericPad[0], opButtons[8]
-);
-
-DOM.pad.addEventListener('click', function(e){
-    if(e.target.tagName === 'BUTTON'){
-        let key, keyIsNumber, keyIsOperator;
-        key = e.target.dataset.key;
+function handleClick(e){
+    if(e.target.tagName === 'BUTTON' || e.type === 'keydown'){
+        let key, keyIsNumber, keyIsOperator, insideKeyDown;
+        insideKeyDown = 'key' in e;
+        key = insideKeyDown? e.key : e.target.dataset.key;
         keyIsNumber = /\d+/.test(key);
         keyIsOperator = /[\+\-\*\/]/.test(key);
 
@@ -121,8 +107,12 @@ DOM.pad.addEventListener('click', function(e){
                 resetDisplay(DOM.display);
                 isDisplayTemp = false;
             }
-
-            appendToDisplay(DOM.display, key);
+            if(DOM.display.textContent !== '0'){
+                appendToDisplay(DOM.display, key);
+            }else if(key !== '0'){
+                resetDisplay(DOM.display);
+                appendToDisplay(DOM.display, key);
+            }
         }else if(keyIsOperator){
             if(operator){
                 storedEntry = operate(operator, parseFloat(storedEntry), parseFloat(getDisplay(DOM.display)));
@@ -192,4 +182,21 @@ DOM.pad.addEventListener('click', function(e){
             }
         }
     }
-});
+}
+
+//Generate numeric pad and special buttons
+numericPad = generateButtons(10);
+opButtons = generateButtons(opList.length, opList);
+
+//Append to pad in correct order
+DOM.pad.append(
+    opButtons[0], opButtons[1], opButtons[2], opButtons[3],
+    numericPad[7], numericPad[8], numericPad[9], opButtons[4],
+    numericPad[4], numericPad[5], numericPad[6], opButtons[5],
+    numericPad[3], numericPad[2], numericPad[1], opButtons[6],
+    opButtons[7], numericPad[0], opButtons[8]
+);
+
+DOM.pad.addEventListener('click', handleClick);
+
+document.addEventListener('keydown', handleClick);

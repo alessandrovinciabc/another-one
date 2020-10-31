@@ -103,6 +103,10 @@ body{
     transform: scale(0.9);
 }
 
+.pad > button:focus{
+    text-decoration: underline;
+}
+
 .pad > button[data-key="="]{
     grid-column-end: span 2;
     background-color: var(--cta-button);
